@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+ <bean name="emp" class="com.examples.SpringDIDemo.Employee">
+  	<property name="id">
+  		<value>1</value>
+  	</property>
+  	<property name="name">
+  		<value>Alex</value>
+  	</property>
+ </bean>
+<bean name="emp2" class="com.examples.SpringDIDemo.Employee">
+  	<property name="id" value="2" />
+  	<property name="name" value="Ben"/>
+ </bean>
+ <bean name="emp3" class="com.examples.SpringDIDemo.Employee" p:id="3" p:name="Cathy"/>
+
+<bean name="emp4" class="com.examples.SpringDIDemo.Employee" p:id="4" p:name="Dennis">
+	<property name="departments">
+		<list>
+			<value>HR</value>
+			<value>Admin</value>
+			<value>Sales</value>
+		</list>
+	</property>
+</bean>
+
+<bean name="emp5" class="com.examples.SpringDIDemo.Employee" p:id="4" p:name="Dennis">
+	<property name="departments">
+		<list>
+			<value>HR</value>
+			<value>Admin</value>
+			<value>Sales</value>
+		</list>
+	</property>
+	<property name="products">
+		<map>
+			<entry key="100" value="Laptop"/>
+			<entry key="200" value="Television"/>
+		</map>
+	</property>
+</bean>
+
+<bean name="emp6" class="com.examples.SpringDIDemo.Employee" p:id="4" p:name="Dennis">
+	<property name="countriesLanguages">
+		<props>
+			<prop key="USA">English</prop>
+			<prop key="Germany">German</prop>
+			<prop key="China">Mandrain</prop>
+		</props>
+	</property>
+</bean>
+
+<bean name="emp7" class="com.examples.SpringDIDemo.Employee" p:id="4" p:name="Dennis">
+	<property name="countries">
+		<set>
+			<value>India</value>
+			<value>USA</value>
+			<value>Russia</value>
+		</set>
+	</property>
+</bean>
+
+<bean name="address1" class="com.examples.SpringDIDemo.Address" p:city="Hyderabad" p:state="TS" p:pincode="500085"/>
+<bean name="emp8" class="com.examples.SpringDIDemo.Employee" p:id="4" p:name="Dennis" scope="prototype">
+	<property name="address">
+		<ref bean="address1"/>
+	</property>
+</bean>
+
+<bean name="item1" class="com.examples.SpringDIDemo.Item" p:id="1" p:name="Milk" p:price="100" p:quantity="2"/>
+
+<bean name="cart1" class="com.examples.SpringDIDemo.ShoppingCart">
+	<property name="item">
+		<ref bean="item1"/>
+	</property>
+</bean>
+
+<bean name="car" class="com.examples.SpringDIDemo.Car" p:regNo="H001" p:model="Honda"/>
+
+<bean name="bank" class="com.examples.SpringDIDemo.Bank" p:name="XYZ" scope="prototype"/>
+
+<bean name="computer" class="com.examples.ConstructorInjecting.Computer">
+	<constructor-arg><value>4</value></constructor-arg>
+	<constructor-arg><value>8GB</value></constructor-arg>
+	<constructor-arg><value>500GB</value></constructor-arg>
+</bean>
+
+<bean name="officeComputer" class="com.examples.ConstructorInjecting.Computer" c:cpu="8" c:memory="8GB" c:storage="500GB"/>
+
+<context:property-placeholder location="com/examples/SpringDIDemo/db.properties"/>
+<bean name="empdao" class="com.examples.SpringDIDemo.EmployeeDAO" 
+c:dbserver="${dbserver}"
+c:dbport="${dbport}"
+c:dbuser="${dbuser}"
+c:dbpassword="${dbpassword}"
+/>
+
+</beans>
