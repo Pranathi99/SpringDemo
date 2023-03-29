@@ -11,19 +11,16 @@ import com.examples.SpringMVCDemo.model.User;
 @Controller
 public class UserController {
 	@RequestMapping("/register")
-	public ModelAndView showRegistrationPage() {
-		ModelAndView mv=new ModelAndView();
-		mv.setViewName("registerUser");
-		return mv;
+	public String showRegistrationPage() {
+		return "registerUser";
 	}
 	
 	@RequestMapping(value="/signupuser",method=RequestMethod.POST)
-	public ModelAndView SignupUser(@ModelAttribute("user") User user)
+	public String SignupUser(@ModelAttribute("user") User user)
 	{
 		System.out.println("From UI. Retrieved object from spring container");
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("user", user);
-		mv.setViewName("registeruserresult");
-		return mv;
+		return "registeruserresult";
 	}
 }
